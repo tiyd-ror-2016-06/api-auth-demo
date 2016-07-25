@@ -1,0 +1,26 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Token</th>
+            <th>Name</th>
+            <th>Expires</th>
+            <th>Deleted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @tokens.each do |t| %>
+            <tr>
+                <td><%= t.nonce %></td>
+                <td><%= t.name %></td>
+                <td><%= distance_of_time t.expires_at %></td>
+                <td>
+                    <% if t.deleted_at %>
+                        <%= distance_of_time t.deleted_at %>
+                    <% else %>
+                        <%= link_to "Delete", token_path(t), method: :delete %>
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,6 @@
+<% if current_user %>
+    <p>Welcome, <%= current_user.email %></p>
+    <%= link_to "Manage Your Tokens", tokens_path %>
+<% else %>
+    <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+<% end %>
