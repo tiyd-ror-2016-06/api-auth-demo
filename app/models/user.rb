@@ -27,10 +27,10 @@ class User < ApplicationRecord
   end
 
   def facebook_id
-    facebook_data["uid"]
+    facebook_data["uid"] if facebook_data
   end
 
   def facebook_token
-    facebook_data["credentials"]["token"]
+    facebook_data["credentials"]["token"] if facebook_data
   end
 end

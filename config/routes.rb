@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   resources :tokens, only: [:index, :destroy]
 
-  get "/api/me" => "api#me"
+  post "/api/me" => "api#register"
+  get  "/api/me" => "api#me"
 
   root to: "pages#home"
 end

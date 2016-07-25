@@ -1,6 +1,12 @@
 class AuthController < Devise::OmniauthCallbacksController
   def facebook
-    auth = Authenticator.new(request.env["omniauth.auth"])
-    redirect_to auth.frontend_url_with_token
+    auth  = request.env["omniauth.auth"]
+    state = request.env["omniauth.params"]["state"]
+
+    token, url = state.split(":", 2)
+    if user = User.with_token(token)
+      user.update! facebook_token: auth.credentials.token, facebook_data: auth.to_h
+    end
+    redirect_to url
   end
 end
